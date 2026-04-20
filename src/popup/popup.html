@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contest Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app" id="app">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">CONTEST<br><em>TRACKER</em></span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" id="refreshBtn" title="Refresh">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          </svg>
+        </button>
+        <button class="icon-btn" id="settingsBtn" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Filter tabs -->
+    <div class="filters" id="filters">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="today">Today</button>
+      <button class="filter-chip" data-filter="codeforces">CF</button>
+      <button class="filter-chip" data-filter="codechef">CC</button>
+      <button class="filter-chip" data-filter="atcoder">AC</button>
+      <button class="filter-chip" data-filter="leetcode">LC</button>
+      <button class="filter-chip" data-filter="kaggle">KG</button>
+    </div>
+
+    <!-- Main content -->
+    <main class="main" id="main">
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Fetching contests…</p>
+      </div>
+
+      <div class="contest-list" id="contestList" style="display:none;"></div>
+
+      <div class="empty" id="empty" style="display:none;">
+        <span class="empty-icon">◎</span>
+        <p>No contests found</p>
+        <small>Try a different filter or refresh</small>
+      </div>
+    </main>
+
+    <!-- Settings panel -->
+    <div class="settings-panel" id="settingsPanel" style="display:none;">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button class="icon-btn" id="closeSettings">✕</button>
+      </div>
+
+      <div class="settings-body">
+        <div class="setting-group">
+          <label class="setting-label">Notifications</label>
+          <div class="toggle-row">
+            <span>Enable alerts</span>
+            <label class="toggle">
+              <input type="checkbox" id="notifEnabled" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Alert me before</label>
+          <div class="advance-options">
+            <label class="check-row"><input type="checkbox" class="advance" value="5" /> 5 min</label>
+            <label class="check-row"><input type="checkbox" class="advance" value="15" /> 15 min</label>
+            <label class="check-row"><input type="checkbox" class="advance" value="30" /> 30 min</label>
+            <label class="check-row"><input type="checkbox" class="advance" value="60" /> 1 hour</label>
+            <label class="check-row"><input type="checkbox" class="advance" value="1440" /> 1 day</label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Platforms</label>
+          <div id="platformToggles"></div>
+        </div>
+
+        <div class="last-updated" id="lastUpdated">—</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
